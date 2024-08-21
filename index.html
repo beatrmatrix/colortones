@@ -12,10 +12,30 @@
         <h1>Upload an Image and Hear Its Characteristics</h1>
         <label for="fileInput" class="upload-button">Choose Image</label>
         <input type="file" id="fileInput" accept="image/*">
+
+        <!-- Instrument Selection Dropdown -->
+       
+        <select id="instrumentSelect">
+            <option value="MembraneSynth">Membrane Synth</option>
+            <option value="PolySynth">Poly Synth</option>
+            <option value="Synth">Synth</option>
+        </select>
+
         <div class="image-container">
-            <canvas id="canvas"></canvas>
+            <div class="left-side">
+                <canvas id="canvas"></canvas>
+                <div id="colorInfo"></div>
+            </div>
+            <div class="right-side">
+                <div id="effects-info">
+                    <p>Reverb Decay: <span id="reverb-decay"></span></p>
+                    <p>Delay Time: <span id="delay-time"></span></p>
+                    <p>Chorus: <span id="chorus-depth"></span></p>
+                    <p>Phaser: <span id="phaser-frequency"></span></p>
+                    <p>Vibrato: <span id="vibrato-depth"></span></p>
+                </div>
+            </div>
         </div>
-        <div id="colorInfo"></div>
     </div>
 
     <!-- Tone.js Library -->

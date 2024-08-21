@@ -1,47 +1,83 @@
 body {
     font-family: 'Noto Sans Mono', monospace;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    text-align: center;
+  }
+
+  #instrumentSelect {
+    margin: 20px 0;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: lightseagreen;
+    border: 1px solid #ccc;
+    font-family: 'Noto Sans Mono', monospace;
+
+
 }
 
-#container {
-    margin: 20px auto;
-    max-width: 800px;
-   }
-   
-  .upload-button {
-        padding: 10px 20px;
-        border: none;
-        background-color: #0e355f;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        transition: background-color 0.3s, transform 0.2s;
-    }
+#instrumentSelect:hover {
+    border: 3px solid rgb(0, 0, 0)
     
-    .upload-button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-            margin-bottom: 20px;
-    }
-
-
-
-    input[type="file"] {
-        display: none;
-    }
-
-canvas {
+  }
+  
+  #container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .image-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 20px;
-    
-    max-width: 600px;
+  }
+  
+  .left-side {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .right-side {
+    width: 50%;
+    padding: 20px;
+  }
+  
+  #canvas {
+    max-width: 100%;
     max-height: 600px;
-}
-
-#colorInfo {
+    border: 1px solid #ccc;
+  }
+  
+  #colorInfo {
     margin-top: 20px;
+  }
+  
+  #effects-info {
+    margin-top: 0;
+  }
+  
+  .upload-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .upload-button:hover {
+    background-color: #3e8e41;
+    border: 3px solid rgb(0, 0, 0)
+  }
+
+  input[type="file"] {
+    display: none;
 }
