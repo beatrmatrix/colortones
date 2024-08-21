@@ -1,0 +1,47 @@
+body {
+    font-family: 'Noto Sans Mono', monospace;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#container {
+    margin: 20px auto;
+    max-width: 800px;
+   }
+   
+  .upload-button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #0e355f;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+    
+    .upload-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+            margin-bottom: 20px;
+    }
+
+
+
+    input[type="file"] {
+        display: none;
+    }
+
+canvas {
+    margin-top: 20px;
+    
+    max-width: 600px;
+    max-height: 600px;
+}
+
+#colorInfo {
+    margin-top: 20px;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEAR IMAGES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Upload an Image and Hear Its Characteristics</h1>
+        <label for="fileInput" class="upload-button">Choose Image</label>
+        <input type="file" id="fileInput" accept="image/*">
+        <div class="image-container">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div id="colorInfo"></div>
+    </div>
+
+    <!-- Tone.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.8.44/build/Tone.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
