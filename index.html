@@ -27,54 +27,47 @@
             <div class="left-side">
                 <canvas id="canvas"></canvas>
                 <div id="colorInfo"></div>
+                <div id="volume-feedback"></div>
+                <div id="note-feedback"></div>
             </div>
+
             <div class="right-side">
                 <div id="effects-info">
-                    <p>Reverb Decay: <span id="reverb-decay"></span></p>
-                    <p>Delay Time: <span id="delay-time"></span></p>
+                    <p>Reverb: <span id="reverb-decay"></span></p>
+                    <p>Delay: <span id="delay-time"></span></p>
                     <p>Chorus: <span id="chorus-depth"></span></p>
                     <p>Phaser: <span id="phaser-frequency"></span></p>
                     <p>Vibrato: <span id="vibrato-depth"></span></p>
+                    <p>Auto Filter: <span id="auto-filter-frequency"></span></p>
+                    <p>Auto Wah: <span id="auto-wah-frequency"></span></p>
+                    <p>Auto Panner: <span id="auto-panner-amount"></span></p>
+                    <p>Chebyshev: <span id="chebyshev-order"></span></p>
+                   
+                    <p>Distortion: <span id="distortion-gain"></span></p>
+                    <p>Feedback Delay: <span id="feedback-delay-time"></span></p>
+                   
+                    <p>Frequency Shifter: <span id="frequency-shifter-frequency"></span></p>
+                   
+                    <p>Ping Pong Delay: <span id="ping-pong-delay-time"></span></p>
+                    <p>Pitch Shift: <span id="pitch-shift-pitch"></span></p>
+                    <p>Stereo Widener: <span id="stereo-widener-width"></span></p>
+                    <p>Tremolo: <span id="tremolo-depth"></span></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        function typeWriter(text, elementId, speed = 50) {
-            let i = 0;
-            function type() {
-                if (i < text.length) {
-                    document.getElementById(elementId).innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            document.getElementById(elementId).innerHTML = ''; // Clear existing text
-            type();
-        }
     
-        // Example usage:
-        document.getElementById("fileInput").addEventListener("change", function() {
-            // Example text to display after an image is uploaded
-            const combinedReasonText = "Reverb Decay: The reverb decay is long because the image has dark and deep colors.\n" +
-                                       "Delay Time: The delay time is short due to bright highlights.\n" +
-                                       "Chorus: Chorus effect is mild as the colors are soft and blended.\n" +
-                                       "Phaser: The phaser frequency is high because of the sharp edges detected.\n" +
-                                       "Vibrato: Vibrato depth is deep because of the image's vivid saturation.";
-            typeWriter(combinedReasonText, "reason-info");
-        });
-    </script>
     
 
     <div id="reason-info">
-        <p id="reverb-reason"></p>
-        <p id="delay-reason"></p>
-        <p id="chorus-reason"></p>
-        <p id="phaser-reason"></p>
-        <p id="vibrato-reason"></p>
+        <p id="reasontext"></p>
+        
     </div>
 
+    <script>
+
+    </script>
    
 
     <!-- Tone.js Library -->
@@ -82,7 +75,7 @@
     <script src="script.js"></script>
     
    
-       </script>
+      
 
 </body>
 
