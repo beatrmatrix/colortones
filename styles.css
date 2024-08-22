@@ -15,20 +15,21 @@ body {
 
 
 }
+#reason-info {
+    white-space: pre-wrap; /* Ensures that white spaces are respected */
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+  
+
 
 #instrumentSelect:hover {
     border: 3px solid rgb(0, 0, 0)
     
   }
   
-  #container {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+
   
   .image-container {
     display: flex;
@@ -53,7 +54,7 @@ body {
   #canvas {
     max-width: 100%;
     max-height: 600px;
-    border: 1px solid #ccc;
+    
   }
   
   #colorInfo {

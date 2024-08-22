@@ -21,6 +21,8 @@
             <option value="Synth">Synth</option>
         </select>
 
+       
+
         <div class="image-container">
             <div class="left-side">
                 <canvas id="canvas"></canvas>
@@ -38,8 +40,52 @@
         </div>
     </div>
 
+    <script>
+        function typeWriter(text, elementId, speed = 50) {
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    document.getElementById(elementId).innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            document.getElementById(elementId).innerHTML = ''; // Clear existing text
+            type();
+        }
+    
+        // Example usage:
+        document.getElementById("fileInput").addEventListener("change", function() {
+            // Example text to display after an image is uploaded
+            const combinedReasonText = "Reverb Decay: The reverb decay is long because the image has dark and deep colors.\n" +
+                                       "Delay Time: The delay time is short due to bright highlights.\n" +
+                                       "Chorus: Chorus effect is mild as the colors are soft and blended.\n" +
+                                       "Phaser: The phaser frequency is high because of the sharp edges detected.\n" +
+                                       "Vibrato: Vibrato depth is deep because of the image's vivid saturation.";
+            typeWriter(combinedReasonText, "reason-info");
+        });
+    </script>
+    
+
+    <div id="reason-info">
+        <p id="reverb-reason"></p>
+        <p id="delay-reason"></p>
+        <p id="chorus-reason"></p>
+        <p id="phaser-reason"></p>
+        <p id="vibrato-reason"></p>
+    </div>
+
+   
+
     <!-- Tone.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/tone@14.8.44/build/Tone.js"></script>
     <script src="script.js"></script>
+    
+   
+       </script>
+
 </body>
+
+
+
 </html>
