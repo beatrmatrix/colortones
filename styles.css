@@ -16,6 +16,14 @@ body {
 
 }
 
+.hide {
+  display: none;
+  color: red;
+  margin-top: 5px;
+}
+
+
+
 #volume-feedback {
   font-size: 12px;
   color: #666;

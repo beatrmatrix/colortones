@@ -15,11 +15,7 @@
 
         <!-- Instrument Selection Dropdown -->
        
-        <select id="instrumentSelect">
-            <option value="MembraneSynth">Membrane Synth</option>
-            <option value="PolySynth">Poly Synth</option>
-            <option value="Synth">Synth</option>
-        </select>
+        
 
        
 
@@ -33,26 +29,83 @@
 
             <div class="right-side">
                 <div id="effects-info">
-                    <p>Reverb: <span id="reverb-decay"></span></p>
-                    <p>Delay: <span id="delay-time"></span></p>
-                    <p>Chorus: <span id="chorus-depth"></span></p>
-                    <p>Phaser: <span id="phaser-frequency"></span></p>
-                    <p>Vibrato: <span id="vibrato-depth"></span></p>
-                    <p>Auto Filter: <span id="auto-filter-frequency"></span></p>
-                    <p>Auto Wah: <span id="auto-wah-frequency"></span></p>
-                    <p>Auto Panner: <span id="auto-panner-amount"></span></p>
-                    <p>Chebyshev: <span id="chebyshev-order"></span></p>
-                   
-                    <p>Distortion: <span id="distortion-gain"></span></p>
-                    <p>Feedback Delay: <span id="feedback-delay-time"></span></p>
-                   
-                    <p>Frequency Shifter: <span id="frequency-shifter-frequency"></span></p>
-                   
-                    <p>Ping Pong Delay: <span id="ping-pong-delay-time"></span></p>
-                    <p>Pitch Shift: <span id="pitch-shift-pitch"></span></p>
-                    <p>Stereo Widener: <span id="stereo-widener-width"></span></p>
-                    <p>Tremolo: <span id="tremolo-depth"></span></p>
+                    <div class="effect-container">
+                        <p>Synth: <span class="effectsdiv" id="synth-type" data-target="SynthReason"></span></p>
+                        <div class="hide" id="SynthReason">Synth reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Reverb: <span class="effectsdiv" id="reverb-decay" data-target="ReverbReason"></span></p>
+                        <div class="hide" id="ReverbReason">Reverb reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Delay: <span class="effectsdiv" id="delay-time" data-target="FeedbackDelayReason"></span></p>
+                        <div class="hide" id="FeedbackDelayReason">Delay reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Chorus: <span class="effectsdiv" id="chorus-depth" data-target="ChorusReason"></span></p>
+                        <div class="hide" id="ChorusReason">Chorus reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Phaser: <span class="effectsdiv" id="phaser-frequency" data-target="PhaserReason"></span></p>
+                        <div class="hide" id="PhaserReason">Phaser reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Vibrato: <span class="effectsdiv" id="vibrato-depth" data-target="VibratoReason"></span></p>
+                        <div class="hide" id="VibratoReason">Vibrato reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Auto Filter: <span class="effectsdiv" id="auto-filter-frequency" data-target="AutoFilterReason"></span></p>
+                        <div class="hide" id="AutoFilterReason">Auto Filter reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Auto Wah: <span class="effectsdiv" id="auto-wah-frequency" data-target="AutoWahReason"></span></p>
+                        <div class="hide" id="AutoWahReason">Auto Wah reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Auto Panner: <span class="effectsdiv" id="auto-panner-amount" data-target="AutoPannerReason"></span></p>
+                        <div class="hide" id="AutoPannerReason">Auto Panner reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Chebyshev: <span class="effectsdiv" id="chebyshev-order" data-target="ChebyshevReason"></span></p>
+                        <div class="hide" id="ChebyshevReason">Chebyshev reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Distortion: <span class="effectsdiv" id="distortion-gain" data-target="DistortionReason"></span></p>
+                        <div class="hide" id="DistortionReason">Distortion reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Frequency Shifter: <span class="effectsdiv" id="frequency-shifter-frequency" data-target="FrequencyShifterReason"></span></p>
+                        <div class="hide" id="FrequencyShifterReason">Frequency Shifter reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Ping Pong Delay: <span class="effectsdiv" id="ping-pong-delay-time" data-target="PingPongDelayReason"></span></p>
+                        <div class="hide" id="PingPongDelayReason">Ping Pong Delay reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Stereo Widener: <span class="effectsdiv" id="stereo-widener-width" data-target="StereoWidenerReason"></span></p>
+                        <div class="hide" id="StereoWidenerReason">Stereo Widener reason details here</div>
+                    </div>
+                
+                    <div class="effect-container">
+                        <p>Tremolo: <span class="effectsdiv" id="tremolo-depth" data-target="TremoloReason"></span></p>
+                        <div class="hide" id="TremoloReason">Tremolo reason details here</div>
+                    </div>
                 </div>
+               
+
             </div>
         </div>
     </div>
@@ -60,13 +113,23 @@
     
     
 
-    <div id="reason-info">
-        <p id="reasontext"></p>
-        
-    </div>
-
     <script>
-
+        document.querySelectorAll('.effectsdiv').forEach(span => {
+            span.addEventListener('mouseover', () => {
+                const targetId = span.getAttribute('data-target');
+                const targetDiv = document.getElementById(targetId);
+                if (targetDiv) {
+                    targetDiv.style.display = 'block';
+                }
+            });
+            span.addEventListener('mouseout', () => {
+                const targetId = span.getAttribute('data-target');
+                const targetDiv = document.getElementById(targetId);
+                if (targetDiv) {
+                    targetDiv.style.display = 'none';
+                }
+            });
+        });
     </script>
    
 
