@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 const PAT = process.env.KEY;
 
 
