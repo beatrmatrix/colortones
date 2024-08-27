@@ -199,7 +199,7 @@ function generateMusicPrompt() {
             })
         };
 
-        fetch("http://localhost:3000/analyze-text", requestOptions)
+        fetch("https://colortones-api.vercel.app/analyze-text", requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.result) {
