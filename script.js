@@ -1,6 +1,3 @@
-require('dotenv').config();
-const PAT = process.env.KEY;
-
 
 
 const USER_ID2 = 'openai';    
@@ -178,134 +175,38 @@ function fetchWithRetry(url, options, retries = 3, delay = 500) {
 
 function generateMusicPrompt() {
     console.log("generateMusicPrompt called");
+    
     const fileInput = document.getElementById('fileInput').files[0];
     if (!fileInput) {
         alert("Please select an image first.");
         return;
     }
 
-    console.log("File input:", fileInput);
-
     const reader = new FileReader();
+    
     reader.onloadend = function () {
-        const base64Image = reader.result.split(',')[1];
-        console.log("Base64 image:", base64Image);
-
-        const raw = JSON.stringify({
-            "user_app_id": {
-                "user_id": USER_ID2,
-                "app_id": APP_ID2
-            },
-            "inputs": [
-                {
-                    "data": {
-                        "text": {
-                            "raw": "YOU HAVE TO Generate number values between 0 and 1 (to two decimal places) for each of the following effects ( AutoFilter, AutoPanner, AutoWah, Chebyshev, Chorus, Distortion, FeedbackDelay, FrequencyShifter, Phaser, PingPongDelay, Reverb, StereoWidener, Tremolo, Vibrato) based on this picture: The value can be 0 to turn the effect off, but the maximum is 1. Provide a reason for each value you choose.  OUTPUT FORMAT SHOULD LOOK LIKE THIS: Reverb: 0.1 - A reason why you set this value. THIS IS USED FOR AN EXPERIMENT, YOU MUST GENEATE VALUES! TRY NOT TO USE ALL THE EFFECTS, THIS MEANS SOME EFFECT VALUES SHOULD BE 0! ALSO CHOOSE A SYNTH BASED O THE IMAGE (AMSynth, DuoSynth, FMSynth, MembraneSynth, MetalSynth, MonoSynth, NoiseSynth, PluckSynth, Synth). OUTPUT LIKE THIS: Synth: the synth you choose  "
-                        },
-                        "image": {
-                            "base64": base64Image
-                        }
-                    }
-                }
-            ]
-        });
-
-        console.log("Raw data:", raw);
+        const base64Image = reader.result.split(',')[1];  // Get base64 image without the data URL prefix
 
         const requestOptions = {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
-                'Authorization': 'Key ' + PAT,
                 'Content-Type': 'application/json'
             },
-            body: raw
+            body: JSON.stringify({
+                text: "what you see?",  // Replace with the actual text prompt you want to send
+                base64Image: base64Image 
+                      // Correctly sending the base64 image
+            })
         };
 
-        console.log("Request options:", requestOptions);
-
-        fetch("https://api.clarifai.com/v2/models/" + MODEL_ID2 + "/versions/" + MODEL_VERSION_ID2 + "/outputs", requestOptions)
-            .then(response => {
-                console.log("Response status:", response.status);
-                return response.json();
-            })
+        fetch("http://localhost:3000/analyze-text", requestOptions)
+            .then(response => response.json())
             .then(data => {
-                console.log("Data:", data);
-                if (data.status.code !== 10000) {
-                    console.error("API Error:", data.status);
+                if (data.result) {
+                    const outputText = data.result;
+                    processOutput(outputText);
                 } else {
-                    const outputText = data.outputs[0].data.text.raw;
-                    console.log("Text Output:", outputText);
-                
-       
-const synthMatch = outputText.match(/Synth:\s*(.*?)\s*-\s*(.*)/);
-const synthType = synthMatch[1];
-const synthTypeElement = synthMatch[1];    
-const synthName = synthType === 'Synth' ? 'Basic Synth' : synthType;
-document.getElementById('synth-type').textContent = synthName;
-updateSynthType(synthType);
-
-
-//Extract values for effects
-const reverbMatch = outputText.match(/Reverb:\s*([\d\.]+)\s*-\s*([^D]*)/);
-const delayMatch = outputText.match(/FeedbackDelay:\s*([\d\.]+)\s*-\s*([^C]*)/);
-const chorusMatch = outputText.match(/Chorus:\s*([\d\.]+)\s*-\s*([^P]*)/);
-const phaserMatch = outputText.match(/Phaser:\s*([\d\.]+)\s*-\s*([^V]*)/);
-const vibratoMatch = outputText.match(/Vibrato:\s*([\d\.]+)\s*-\s*(.*)/);
-const autoFilterMatch = outputText.match(/AutoFilter:\s*([\d\.]+)\s*-\s*(.*)/);
-const autoPannerMatch = outputText.match(/AutoPanner:\s*([\d\.]+)\s*-\s*(.*)/);
-const autoWahMatch = outputText.match(/AutoWah:\s*([\d\.]+)\s*-\s*(.*)/);
-const chebyshevMatch = outputText.match(/Chebyshev:\s*([\d\.]+)\s*-\s*(.*)/);
-const distortionMatch = outputText.match(/Distortion:\s*([\d\.]+)\s*-\s*(.*)/);
-const frequencyShifterMatch = outputText.match(/FrequencyShifter:\s*([\d\.]+)\s*-\s*(.*)/);
-const pingPongDelayMatch = outputText.match(/PingPongDelay:\s*([\d\.]+)\s*-\s*(.*)/);
-const stereoWidenerMatch = outputText.match(/StereoWidener:\s*([\d\.]+)\s*-\s*(.*)/);
-const tremoloMatch = outputText.match(/Tremolo:\s*([\d\.]+)\s*-\s*(.*)/);
-
-// Handle cases where the match might not be found
-const reverbValue = reverbMatch ? parseFloat(reverbMatch[1]) : null;
-const delayValue = delayMatch ? parseFloat(delayMatch[1]) : null;
-const chorusValue = chorusMatch ? parseFloat(chorusMatch[1]) : null;
-const phaserValue = phaserMatch ? parseFloat(phaserMatch[1]) : null;
-const vibratoValue = vibratoMatch ? parseFloat(vibratoMatch[1]) : null;
-const autoFilterValue = autoFilterMatch ? parseFloat(autoFilterMatch[1]) : null;
-const autoPannerValue = autoPannerMatch ? parseFloat(autoPannerMatch[1]) : null;
-const autoWahValue = autoWahMatch ? parseFloat(autoWahMatch[1]) : null;
-const chebyshevValue = chebyshevMatch ? parseFloat(chebyshevMatch[1]) : null;
-const distortionValue = distortionMatch ? parseFloat(distortionMatch[1]) : null;
-const frequencyShifterValue = frequencyShifterMatch ? parseFloat(frequencyShifterMatch[1]) : null;
-const pingPongDelayValue = pingPongDelayMatch ? parseFloat(pingPongDelayMatch[1]) : null;
-const stereoWidenerValue = stereoWidenerMatch ? parseFloat(stereoWidenerMatch[1]) : null;
-const tremoloValue = tremoloMatch ? parseFloat(tremoloMatch[1]) : null;
-
-  
-
-  
-const regexPattern = /(\w+):\s*[\d\.]+\s*-\s*(.*)/g;
-
-let match;
-const reasons = {};
-
-// Extract reasons for each effect
-while ((match = regexPattern.exec(outputText)) !== null) {
-    const effect = match[1];
-    const reason = match[2].trim();
-    reasons[effect] = reason;
-}
-
-// Log extracted reasons (or use them as needed)
-console.log(reasons);
-
-// Example of how to display reasons (assuming you have HTML elements with IDs matching effect names)
-for (const [effect, reason] of Object.entries(reasons)) {
-    const elementId = `${effect}Reason`;
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.innerHTML = reason;
-    }
-}
-
-adjustEffectsBasedOnImage(reverbValue, delayValue, chorusValue, phaserValue, vibratoValue, autoFilterValue, autoPannerValue, autoWahValue, chebyshevValue, distortionValue, frequencyShifterValue, pingPongDelayValue, stereoWidenerValue, tremoloValue);
+                    console.error("API Error:", data.error);
                 }
             })
             .catch(error => console.error('Fetch error:', error));
@@ -316,6 +217,84 @@ adjustEffectsBasedOnImage(reverbValue, delayValue, chorusValue, phaserValue, vib
     };
 
     reader.readAsDataURL(fileInput);
+}
+
+function processOutput(outputText) {
+    // Function to handle the output text from the server.
+    console.log("Generated Output:", outputText);
+    // Update the UI or perform any other actions with the output text.
+
+
+
+    const synthMatch = outputText.match(/Synth:\s*(.*?)\s*-\s*(.*)/);
+    const synthType = synthMatch[1];
+    const synthTypeElement = synthMatch[1];    
+    const synthName = synthType === 'Synth' ? 'Basic Synth' : synthType;
+    document.getElementById('synth-type').textContent = synthName;
+    updateSynthType(synthType);
+    
+    
+    //Extract values for effects
+    const reverbMatch = outputText.match(/Reverb:\s*([\d\.]+)\s*-\s*([^D]*)/);
+    const delayMatch = outputText.match(/FeedbackDelay:\s*([\d\.]+)\s*-\s*([^C]*)/);
+    const chorusMatch = outputText.match(/Chorus:\s*([\d\.]+)\s*-\s*([^P]*)/);
+    const phaserMatch = outputText.match(/Phaser:\s*([\d\.]+)\s*-\s*([^V]*)/);
+    const vibratoMatch = outputText.match(/Vibrato:\s*([\d\.]+)\s*-\s*(.*)/);
+    const autoFilterMatch = outputText.match(/AutoFilter:\s*([\d\.]+)\s*-\s*(.*)/);
+    const autoPannerMatch = outputText.match(/AutoPanner:\s*([\d\.]+)\s*-\s*(.*)/);
+    const autoWahMatch = outputText.match(/AutoWah:\s*([\d\.]+)\s*-\s*(.*)/);
+    const chebyshevMatch = outputText.match(/Chebyshev:\s*([\d\.]+)\s*-\s*(.*)/);
+    const distortionMatch = outputText.match(/Distortion:\s*([\d\.]+)\s*-\s*(.*)/);
+    const frequencyShifterMatch = outputText.match(/FrequencyShifter:\s*([\d\.]+)\s*-\s*(.*)/);
+    const pingPongDelayMatch = outputText.match(/PingPongDelay:\s*([\d\.]+)\s*-\s*(.*)/);
+    const stereoWidenerMatch = outputText.match(/StereoWidener:\s*([\d\.]+)\s*-\s*(.*)/);
+    const tremoloMatch = outputText.match(/Tremolo:\s*([\d\.]+)\s*-\s*(.*)/);
+    
+    // Handle cases where the match might not be found
+    const reverbValue = reverbMatch ? parseFloat(reverbMatch[1]) : null;
+    const delayValue = delayMatch ? parseFloat(delayMatch[1]) : null;
+    const chorusValue = chorusMatch ? parseFloat(chorusMatch[1]) : null;
+    const phaserValue = phaserMatch ? parseFloat(phaserMatch[1]) : null;
+    const vibratoValue = vibratoMatch ? parseFloat(vibratoMatch[1]) : null;
+    const autoFilterValue = autoFilterMatch ? parseFloat(autoFilterMatch[1]) : null;
+    const autoPannerValue = autoPannerMatch ? parseFloat(autoPannerMatch[1]) : null;
+    const autoWahValue = autoWahMatch ? parseFloat(autoWahMatch[1]) : null;
+    const chebyshevValue = chebyshevMatch ? parseFloat(chebyshevMatch[1]) : null;
+    const distortionValue = distortionMatch ? parseFloat(distortionMatch[1]) : null;
+    const frequencyShifterValue = frequencyShifterMatch ? parseFloat(frequencyShifterMatch[1]) : null;
+    const pingPongDelayValue = pingPongDelayMatch ? parseFloat(pingPongDelayMatch[1]) : null;
+    const stereoWidenerValue = stereoWidenerMatch ? parseFloat(stereoWidenerMatch[1]) : null;
+    const tremoloValue = tremoloMatch ? parseFloat(tremoloMatch[1]) : null;
+    
+      
+    
+      
+    const regexPattern = /(\w+):\s*[\d\.]+\s*-\s*(.*)/g;
+    
+    let match;
+    const reasons = {};
+    
+    // Extract reasons for each effect
+    while ((match = regexPattern.exec(outputText)) !== null) {
+        const effect = match[1];
+        const reason = match[2].trim();
+        reasons[effect] = reason;
+    }
+    
+    // Log extracted reasons (or use them as needed)
+    console.log(reasons);
+    
+    // Example of how to display reasons (assuming you have HTML elements with IDs matching effect names)
+    for (const [effect, reason] of Object.entries(reasons)) {
+        const elementId = `${effect}Reason`;
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.innerHTML = reason;
+        }
+    }
+
+adjustEffectsBasedOnImage(reverbValue, delayValue, chorusValue, phaserValue, vibratoValue, autoFilterValue, autoPannerValue, autoWahValue, chebyshevValue, distortionValue, frequencyShifterValue, pingPongDelayValue, stereoWidenerValue, tremoloValue);
+    
 }
 
 
